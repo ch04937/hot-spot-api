@@ -13,7 +13,11 @@ exports.up = function(knex) {
         tbl
             .string('password', 255)
             .notNullable();
+        tbl
+            .string('reEnterPassword')
+            .notNullable();
       })
+
 };
 
 exports.down = function(knex) {
