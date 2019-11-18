@@ -16,14 +16,14 @@ exports.up = function(knex) {
 			tbl.increments();
 			tbl.integer("userId")
 				.unsigned()
-				.reference("id")
+				.references("id")
 				.inTable("users")
 				.onDelete("CASCADE")
 				.onUpdate("CASCADE");
 			tbl.integer("messageId")
 				.unsigned()
-				.reference("id")
-				.inTable("messade")
+				.references("id")
+				.inTable("message")
 				.onDelete("CASCADE")
 				.onUpdate("CASCADE");
 		});
