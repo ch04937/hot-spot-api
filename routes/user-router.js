@@ -13,5 +13,9 @@ router.get("/", (req, res) => {
 			res.status(500).json({ message: "server error", err: err });
 		});
 });
+router.get("/:id/room", (req, res) => {
+	const { id } = req.params;
+	Users.get;
+});
 
 module.exports = router;
