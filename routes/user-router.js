@@ -4,7 +4,7 @@ const router = require("express").Router();
 const Users = require("./user-model.js");
 
 router.get("/", (req, res) => {
-	Users.find()
+	Users.getAll()
 		.then((users) => {
 			res.json({ users });
 		})
@@ -13,9 +13,17 @@ router.get("/", (req, res) => {
 			res.status(500).json({ message: "server error", err: err });
 		});
 });
+
+//link room to user with user id
 router.get("/:id/room", (req, res) => {
 	const { id } = req.params;
-	Users.get;
+
+	Users.getRoom(id)
+		.then((room) => res.status(200).json({ room }))
+		.catch((err) => {
+			console.log(err);
+			res.status(500).json({ message: "could not get room", err: err });
+		});
 });
 
 module.exports = router;

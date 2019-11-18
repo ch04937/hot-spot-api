@@ -8,7 +8,7 @@ exports.up = function(knex) {
 			tbl.string("email").notNullable();
 			tbl.string("password", 255).notNullable();
 		})
-		.createTable("message", (tbl) => {
+		.createTable("chat", (tbl) => {
 			tbl.increments();
 			tbl.string("text", 255).notNullable();
 		})
@@ -33,7 +33,7 @@ exports.up = function(knex) {
 				.onDelete("CASCADE")
 				.onUpdate("CASCADE");
 		})
-		.createTable("userRoomMessage", (tbl) => {
+		.createTable("userRoomChat", (tbl) => {
 			tbl.increments();
 			tbl.integer("userId")
 				.unsigned()
@@ -47,10 +47,10 @@ exports.up = function(knex) {
 				.inTable("room")
 				.onDelete("CASCADE")
 				.onUpdate("CASCADE");
-			tbl.integer("messageId")
+			tbl.integer("chatId")
 				.unsigned()
 				.references("id")
-				.inTable("message")
+				.inTable("chat")
 				.onDelete("CASCADE")
 				.onUpdate("CASCADE");
 		});
@@ -58,8 +58,9 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
 	return knex.schema
-		.dropTableIfExists("userRoomMessage")
+		.dropTableIfExists("userRoomChat")
 		.dropTableIfExists("userRoom")
-		.dropTableIfExists("message")
+		.dropTableIfExists("room")
+		.dropTableIfExists("chat")
 		.dropTableIfExists("users");
 };

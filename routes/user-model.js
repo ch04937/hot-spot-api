@@ -2,14 +2,22 @@ const db = require("../data/db-config.js");
 
 module.exports = {
 	add,
-	find,
+	getAll,
+	getRoom,
 	findById,
 	findBy,
 	update,
 	remove,
 };
-function find() {
+function getAll() {
 	return db("users").select("id", "username", "password", "email");
+}
+function getRoom(id) {
+	return db("users as u")
+		.join("userRoom as ur", "ur.userId", "u.id")
+		.join("room as r", "r.id", "ur.roomId")
+		.select("ur.id", "u.username", "r.name", "r.location", "r.roomNumber")
+		.where("ur.userId", id);
 }
 function findBy(filter) {
 	return db("users").where(filter);
