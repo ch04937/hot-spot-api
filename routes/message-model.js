@@ -1,21 +1,25 @@
 const db = require("../data/db-config.js");
 
 module.exports = {
+	getAll,
+	getByRoomId,
 	add,
-	find,
 	findById,
-	findBy,
+	// findBy,
 	update,
 	remove,
 };
-function find() {
-	return db("message").select("id", "message");
+function getAll() {
+	return db("chat");
 }
-function findBy(filter) {
-	return db("message").where(filter);
+function getByRoomId(id) {
+	return db("userRoomChat as urc")
+		.join("room as r", "r.id", "urc.roomId")
+		.join("chat as c", "c.id", "urc.chatId")
+		.where({ roomId: id });
 }
-function add(user) {
-	return db("message")
+function add(id) {
+	return db("chat")
 		.insert(user, "id")
 		.then((ids) => {
 			const [id] = ids;

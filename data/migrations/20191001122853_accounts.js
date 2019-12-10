@@ -1,24 +1,29 @@
 exports.up = function(knex) {
 	return knex.schema
-		.createTable("users", (tbl) => {
+		.createTable("users", tbl => {
 			tbl.increments();
 			tbl.string("username", 255)
 				.notNullable()
 				.unique();
+			tbl.string("firstName", 255).notNullable();
+			tbl.string("lastName", 255).notNullable();
 			tbl.string("email").notNullable();
 			tbl.string("password", 255).notNullable();
+			tbl.string("city", 255).notNullable();
+			tbl.string("state", 255).notNullable();
+			tbl.string("country", 255).notNullable();
 		})
-		.createTable("chat", (tbl) => {
+		.createTable("chat", tbl => {
 			tbl.increments();
 			tbl.string("text", 255).notNullable();
 		})
-		.createTable("room", (tbl) => {
+		.createTable("room", tbl => {
 			tbl.increments();
 			tbl.string("name", 255).notNullable();
 			tbl.string("location", 255).notNullable();
 			tbl.string("roomNumber", 255).notNullable();
 		})
-		.createTable("userRoom", (tbl) => {
+		.createTable("userRoom", tbl => {
 			tbl.increments();
 			tbl.integer("userId")
 				.unsigned()
@@ -33,7 +38,7 @@ exports.up = function(knex) {
 				.onDelete("CASCADE")
 				.onUpdate("CASCADE");
 		})
-		.createTable("userRoomChat", (tbl) => {
+		.createTable("userRoomChat", tbl => {
 			tbl.increments();
 			tbl.integer("userId")
 				.unsigned()

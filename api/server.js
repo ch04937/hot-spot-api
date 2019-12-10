@@ -14,8 +14,8 @@ server.use(express.json());
 
 //routes
 server.use("/users", userRouter);
-server.use("/message", messageRouter);
 server.use("/auth", authRouter);
+server.use("/message", messageRouter);
 
 //tesing server
 server.get("/", (req, res) => {

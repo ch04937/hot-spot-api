@@ -10,13 +10,12 @@ module.exports = {
 	remove,
 };
 function getAll() {
-	return db("users").select("id", "username", "password", "email");
+	return db("users");
 }
 function getRoom(id) {
 	return db("users as u")
 		.join("userRoom as ur", "ur.userId", "u.id")
 		.join("room as r", "r.id", "ur.roomId")
-		.select("ur.id", "u.username", "r.name", "r.location", "r.roomNumber")
 		.where("ur.userId", id);
 }
 function findBy(filter) {
@@ -25,7 +24,7 @@ function findBy(filter) {
 function add(user) {
 	return db("users")
 		.insert(user, "id")
-		.then((ids) => {
+		.then(ids => {
 			const [id] = ids;
 			return findById(id);
 		});
@@ -40,7 +39,7 @@ function update(changes, id) {
 	return db("users")
 		.where("id", id)
 		.update(changes)
-		.then((count) => {
+		.then(count => {
 			count > 0 ? this.get(id) : null;
 		});
 }
