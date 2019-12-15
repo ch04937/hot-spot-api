@@ -23,10 +23,9 @@ const validateLogin = (req, res, next) => {
 
 	if (!req.body.userId || !req.body.password) {
 		res.status(400).json({
-			message: "auth/missing one or more request combination.",
+			message: "auth/missing one or more request combination id",
 		});
 	}
-
 	next();
 };
 

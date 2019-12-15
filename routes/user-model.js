@@ -3,16 +3,17 @@ const db = require("../data/db-config.js");
 module.exports = {
 	add,
 	getAll,
-	getRoom,
+	getRooms,
 	findById,
 	findBy,
 	update,
 	remove,
+	find,
 };
 function getAll() {
 	return db("users");
 }
-function getRoom(id) {
+function getRooms(id) {
 	return db("users as u")
 		.join("userRoom as ur", "ur.userId", "u.id")
 		.join("room as r", "r.id", "ur.roomId")
@@ -48,4 +49,11 @@ function remove(id) {
 	return db("users")
 		.where("id", id)
 		.del();
+}
+function find(id) {
+	return db("users")
+		.where(function() {
+			this.where("username", "=", id).orWhere("email", "=", id);
+		})
+		.first();
 }
