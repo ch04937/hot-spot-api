@@ -5,7 +5,6 @@ module.exports = {
 	getByRoomId,
 	add,
 	findById,
-	// findBy,
 	update,
 	remove,
 };
@@ -21,7 +20,7 @@ function getByRoomId(id) {
 function add(id) {
 	return db("chat")
 		.insert(user, "id")
-		.then((ids) => {
+		.then(ids => {
 			const [id] = ids;
 			return findById(id);
 		});
@@ -36,7 +35,7 @@ function update(changes, id) {
 	return db("message")
 		.where("id", id)
 		.update(changes)
-		.then((count) => {
+		.then(count => {
 			count > 0 ? this.get(id) : null;
 		});
 }
