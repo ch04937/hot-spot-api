@@ -7,6 +7,7 @@ const client = yelp.client(process.env.API_KEY, process.env.CLIENT_ID); //yelp k
 router.post("/yelp", async (req, res) => {
 	try {
 		const { location } = req.body;
+		console.log(location);
 		const spot = await client
 			.search({
 				location: location,

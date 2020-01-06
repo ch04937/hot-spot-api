@@ -19,6 +19,7 @@ exports.seed = function(knex) {
 					city: "houston",
 					state: "tx",
 					country: "usa",
+					zipcode: 77042,
 				},
 				{
 					id: 2,
@@ -30,6 +31,7 @@ exports.seed = function(knex) {
 					state: "tx",
 					country: "usa",
 					password: "password1",
+					zipcode: 77040,
 				},
 				{
 					id: 3,
@@ -41,6 +43,7 @@ exports.seed = function(knex) {
 					state: "tx",
 					country: "usa",
 					password: "password1",
+					zipcode: 77099,
 				},
 			]);
 		});

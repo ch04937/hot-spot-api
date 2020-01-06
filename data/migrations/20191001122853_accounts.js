@@ -12,6 +12,7 @@ exports.up = function(knex) {
 			tbl.string("city", 255).notNullable();
 			tbl.string("state", 255).notNullable();
 			tbl.string("country", 255).notNullable();
+			tbl.integer("zipcode").notNullable();
 		})
 		.createTable("chat", tbl => {
 			tbl.increments();
