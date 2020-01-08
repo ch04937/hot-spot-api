@@ -7,7 +7,7 @@ exports.up = function(knex) {
 				.unique();
 			tbl.string("firstName", 255).notNullable();
 			tbl.string("lastName", 255).notNullable();
-			tbl.string("email").notNullable();
+			tbl.string("email", 255).notNullable();
 			tbl.string("password", 255).notNullable();
 			tbl.string("city", 255).notNullable();
 			tbl.string("state", 255).notNullable();
@@ -59,11 +59,18 @@ exports.up = function(knex) {
 				.inTable("chat")
 				.onDelete("CASCADE")
 				.onUpdate("CASCADE");
+		})
+		.createTable("favorite", tbl => {
+			tbl.increments();
+			tbl.string("yelpId", 255)
+				.notNullable()
+				.unique();
 		});
 };
 
 exports.down = function(knex) {
 	return knex.schema
+		.dropTableIfExists("favorite")
 		.dropTableIfExists("userRoomChat")
 		.dropTableIfExists("userRoom")
 		.dropTableIfExists("room")

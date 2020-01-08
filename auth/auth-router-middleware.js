@@ -7,6 +7,7 @@ const validateRegistration = (req, res, next) => {
 		!req.body.lastName ||
 		!req.body.username ||
 		!req.body.email ||
+		!req.body.zipcode ||
 		!req.body.password
 	) {
 		res.status(400).json({

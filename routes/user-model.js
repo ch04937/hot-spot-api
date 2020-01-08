@@ -4,7 +4,7 @@ module.exports = {
 	add,
 	getAll,
 	getRooms,
-	findById,
+	getById,
 	findBy,
 	update,
 	remove,
@@ -12,6 +12,11 @@ module.exports = {
 };
 function getAll() {
 	return db("users");
+}
+function getById(id) {
+	return db("users")
+		.where({ id })
+		.first();
 }
 function getRooms(id) {
 	return db("users as u")
@@ -27,13 +32,8 @@ function add(user) {
 		.insert(user, "id")
 		.then(ids => {
 			const [id] = ids;
-			return findById(id);
+			return getById(id);
 		});
-}
-function findById(id) {
-	return db("users")
-		.where({ id })
-		.first();
 }
 
 function update(changes, id) {

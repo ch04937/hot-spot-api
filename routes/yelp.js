@@ -1,13 +1,12 @@
 const router = require("express").Router();
 const yelp = require("yelp-fusion");
 const client = yelp.client(process.env.API_KEY, process.env.CLIENT_ID); //yelp key
-
-// const Search = require("./yelp-model");
+const verifyUser = require("../auth/verify-user-middleware");
+const Model = require("./yelp-model");
 
 router.post("/yelp", async (req, res) => {
 	try {
 		const { location } = req.body;
-		console.log(location);
 		const spot = await client
 			.search({
 				location: location,
@@ -18,6 +17,27 @@ router.post("/yelp", async (req, res) => {
 	} catch (e) {
 		console.log("error/ cannot get event", e);
 		res.status(500).json({ message: "internal server error" });
+	}
+});
+
+//favorite route
+router.get("/favorites", async (req, res) => {
+	try {
+		const response = await Model.getAll();
+		res.status(200).json(response);
+	} catch (e) {
+		console.log("error/ cannot get event", e);
+		res.status(500).json({ message: "internal server error", e });
+	}
+});
+router.post("/favorites", async (req, res) => {
+	try {
+		const { yelpId } = req.body;
+		const response = await Model.addToFavorite({ yelpId });
+		res.status(200).json(response);
+	} catch (e) {
+		console.log("error/ cannot get event", e);
+		res.status(500).json({ message: "internal server error", e });
 	}
 });
 

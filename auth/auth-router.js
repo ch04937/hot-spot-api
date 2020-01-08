@@ -20,6 +20,7 @@ router.post("/register", validateRegistration, async (req, res) => {
 		city,
 		state,
 		country,
+		zipcode,
 	} = req.body;
 
 	const hashedPassword = bcrypt.hashSync(password, 10);
@@ -32,6 +33,7 @@ router.post("/register", validateRegistration, async (req, res) => {
 		state,
 		country,
 		password: hashedPassword,
+		zipcode,
 	};
 
 	try {
@@ -48,6 +50,7 @@ router.post("/register", validateRegistration, async (req, res) => {
 				city: user.city,
 				state: user.state,
 				country: user.country,
+				zipcode: user.zipcode,
 			},
 			accessToken: token,
 		});
@@ -79,6 +82,7 @@ router.post("/login", [validateLogin], (req, res) => {
 						city: user.city,
 						state: user.state,
 						country: user.country,
+						zipcode: user.zipcode,
 					},
 					accessToken: token,
 				});

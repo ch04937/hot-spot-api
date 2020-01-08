@@ -30,7 +30,10 @@ exports.seed = function(knex) {
 					city: "houston",
 					state: "tx",
 					country: "usa",
-					password: "password1",
+					password: bcrypt.hashSync(
+						process.env.SEED_PASSWORD || "password2",
+						10
+					),
 					zipcode: 77040,
 				},
 				{
@@ -42,7 +45,10 @@ exports.seed = function(knex) {
 					city: "austin",
 					state: "tx",
 					country: "usa",
-					password: "password1",
+					password: bcrypt.hashSync(
+						process.env.SEED_PASSWORD || "password3",
+						10
+					),
 					zipcode: 77099,
 				},
 			]);
